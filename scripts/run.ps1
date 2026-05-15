@@ -1,3 +1,5 @@
 $ErrorActionPreference = "Stop"
 Set-Location -Path (Split-Path -Parent $PSScriptRoot)
-py -3 -m crestron_av_sim --config config/devices.json --scenarios config/scenarios.json
+
+$Lab = if ($args.Count -gt 0) { $args[0] } else { "config/labs/default_lab.json" }
+py -3 -m crestron_av_sim --lab $Lab --catalog catalog/device_catalog.json --scenarios config/scenarios.json
