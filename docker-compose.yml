@@ -1,0 +1,18 @@
+services:
+  crestron-av-sim:
+    build: .
+    container_name: crestron-av-lab-simulator
+    ports:
+      - "8080:8080"
+      - "4352:4352"
+      - "5678:5678"
+      - "52381:52381/udp"
+      - "9001:9001"
+      - "2202:2202"
+      - "8101:8101"
+      - "8102:8102"
+      - "9100:9100"
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    restart: unless-stopped
