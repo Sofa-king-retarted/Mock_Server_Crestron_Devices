@@ -1,0 +1,75 @@
+{
+  "dashboard": {"host": "0.0.0.0", "port": 8080},
+  "defaults": {"host": "0.0.0.0", "online": true, "response_delay_ms": 0},
+  "devices": [
+    {
+      "id": "projector_a",
+      "name": "Room A Epson/PJLink Projector",
+      "type": "pjlink_projector",
+      "host": "0.0.0.0",
+      "port": 4352,
+      "state": {"power": "off", "input": "RGB1", "lamp_hours": 128}
+    },
+    {
+      "id": "camera_a",
+      "name": "Room A Vaddio Camera TCP",
+      "type": "vaddio_camera",
+      "host": "0.0.0.0",
+      "port": 5678,
+      "state": {"power": "on", "preset": 1, "pan": 0, "tilt": 0, "zoom": 0}
+    },
+    {
+      "id": "camera_visca_udp",
+      "name": "VISCA-over-IP Camera UDP",
+      "type": "visca_udp_camera",
+      "host": "0.0.0.0",
+      "port": 52381,
+      "state": {"power": "on", "preset": 1}
+    },
+    {
+      "id": "tesira_server",
+      "name": "Biamp Tesira Server",
+      "type": "tesira",
+      "host": "0.0.0.0",
+      "port": 9001,
+      "state": {"room_a_mute": false, "room_b_mute": false, "room_c_mute": false, "room_a_level": -12},
+      "response_rules": [
+        {"contains": "DEVICE get version", "response": "+OK \"version\":\"4.8.0-mock\"\r\n"},
+        {"contains": "RoomA_Mute get mute", "response_state": "room_a_mute", "format": "+OK {value}\r\n"},
+        {"contains": "RoomA_Level get level", "response_state": "room_a_level", "format": "+OK {value}\r\n"}
+      ]
+    },
+    {
+      "id": "shure_mics",
+      "name": "Shure Mic System",
+      "type": "shure",
+      "host": "0.0.0.0",
+      "port": 2202,
+      "state": {"device_id": "SHURE-MOCK-001", "audio_mute": "OFF"}
+    },
+    {
+      "id": "display_a",
+      "name": "Generic Room A Display",
+      "type": "display",
+      "host": "0.0.0.0",
+      "port": 9100,
+      "state": {"power": "off", "input": "HDMI1", "volume": 25, "mute": false}
+    },
+    {
+      "id": "nvx_a_tx",
+      "name": "Room A Mock NVX Encoder",
+      "type": "nvx_http",
+      "host": "0.0.0.0",
+      "port": 8101,
+      "state": {"role": "transmitter", "device_name": "NVX-A-TX-MOCK", "stream_location": "239.8.0.101", "video_sync": true}
+    },
+    {
+      "id": "nvx_a_rx",
+      "name": "Room A Mock NVX Decoder",
+      "type": "nvx_http",
+      "host": "0.0.0.0",
+      "port": 8102,
+      "state": {"role": "receiver", "device_name": "NVX-A-RX-MOCK", "stream_location": "239.8.0.101", "video_sync": true}
+    }
+  ]
+}
