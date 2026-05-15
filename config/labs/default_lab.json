@@ -1,0 +1,15 @@
+{
+  "lab_id": "default_single_room",
+  "name": "Default Single Room Lab",
+  "dashboard": {"host": "0.0.0.0", "port": 8080},
+  "defaults": {"host": "0.0.0.0", "online": true, "response_delay_ms": 0},
+  "devices": [
+    {"id": "nvx_a_tx", "name": "Room A NVX Encoder", "model_key": "crestron_dm_nvx_e30", "port": 8101, "state": {"stream_location": "239.8.0.101"}},
+    {"id": "nvx_a_rx", "name": "Room A NVX Decoder", "model_key": "crestron_dm_nvx_d30", "port": 8102, "state": {"stream_location": "239.8.0.101"}},
+    {"id": "projector_a", "name": "Room A Projector", "model_key": "generic_pjlink_projector", "port": 4352},
+    {"id": "camera_a", "name": "Room A Vaddio Camera", "model_key": "vaddio_ptz_camera", "port": 5678},
+    {"id": "tesira_server", "name": "Biamp Tesira Server", "model_key": "biamp_tesira_server", "port": 9001},
+    {"id": "shure_mics", "name": "Shure Mic System", "model_key": "shure_mxa_microphone", "port": 2202},
+    {"id": "display_a", "name": "Room A Display", "model_key": "generic_display_tcp", "port": 9100}
+  ]
+}
