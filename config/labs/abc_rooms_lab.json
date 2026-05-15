@@ -1,0 +1,25 @@
+{
+  "lab_id": "abc_rooms",
+  "name": "A/B/C Divisible Room Lab",
+  "dashboard": {"host": "0.0.0.0", "port": 8080},
+  "defaults": {"host": "0.0.0.0", "online": true, "response_delay_ms": 0},
+  "devices": [
+    {"id": "nvx_a_tx", "name": "Room A Podium NVX TX", "model_key": "crestron_dm_nvx_360", "port": 8101, "state": {"role": "transceiver", "stream_location": "239.8.0.101"}},
+    {"id": "nvx_b_tx", "name": "Room B Podium NVX TX", "model_key": "crestron_dm_nvx_360", "port": 8103, "state": {"role": "transceiver", "stream_location": "239.8.0.103"}},
+    {"id": "nvx_c_tx", "name": "Room C Podium NVX TX", "model_key": "crestron_dm_nvx_360", "port": 8105, "state": {"role": "transceiver", "stream_location": "239.8.0.105"}},
+    {"id": "nvx_a_rx", "name": "Room A Projector NVX RX", "model_key": "crestron_dm_nvx_d30", "port": 8102, "state": {"stream_location": "239.8.0.101"}},
+    {"id": "nvx_b_rx", "name": "Room B Projector NVX RX", "model_key": "crestron_dm_nvx_d30", "port": 8104, "state": {"stream_location": "239.8.0.103"}},
+    {"id": "nvx_c_rx", "name": "Room C Projector NVX RX", "model_key": "crestron_dm_nvx_d30", "port": 8106, "state": {"stream_location": "239.8.0.105"}},
+    {"id": "projector_a", "name": "Room A Epson Projector", "model_key": "generic_pjlink_projector", "port": 4352},
+    {"id": "projector_b", "name": "Room B Epson Projector", "model_key": "generic_pjlink_projector", "port": 4354},
+    {"id": "projector_c", "name": "Room C Epson Projector", "model_key": "generic_pjlink_projector", "port": 4356},
+    {"id": "camera_a", "name": "Room A Camera", "model_key": "vaddio_ptz_camera", "port": 5678},
+    {"id": "camera_b", "name": "Room B Camera", "model_key": "vaddio_ptz_camera", "port": 5680},
+    {"id": "camera_c", "name": "Room C Camera", "model_key": "vaddio_ptz_camera", "port": 5682},
+    {"id": "tesira_server", "name": "Biamp Tesira Server", "model_key": "biamp_tesira_server", "port": 9001},
+    {"id": "shure_mics", "name": "Shure Wireless/Ceiling Mics", "model_key": "shure_mxa_microphone", "port": 2202},
+    {"id": "amp_a", "name": "Room A Amplifier", "model_key": "generic_amplifier", "port": 9401},
+    {"id": "amp_b", "name": "Room B Amplifier", "model_key": "generic_amplifier", "port": 9402},
+    {"id": "amp_c", "name": "Room C Amplifier", "model_key": "generic_amplifier", "port": 9403}
+  ]
+}
