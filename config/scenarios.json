@@ -1,0 +1,43 @@
+{
+  "scenarios": [
+    {
+      "id": "normal_startup",
+      "name": "Normal Startup",
+      "description": "Everything online with normal feedback.",
+      "set": {
+        "projector_a.online": true,
+        "camera_a.online": true,
+        "tesira_server.online": true,
+        "shure_mics.online": true,
+        "display_a.online": true,
+        "nvx_a_tx.online": true,
+        "nvx_a_rx.online": true,
+        "tesira_server.response_delay_ms": 0
+      }
+    },
+    {
+      "id": "projector_offline",
+      "name": "Projector Offline",
+      "description": "Projector does not accept TCP connections.",
+      "set": {"projector_a.online": false}
+    },
+    {
+      "id": "slow_tesira",
+      "name": "Slow Tesira Replies",
+      "description": "Tesira responds slowly to test timeout and retry logic.",
+      "set": {"tesira_server.online": true, "tesira_server.response_delay_ms": 2500}
+    },
+    {
+      "id": "nvx_no_video_sync",
+      "name": "NVX No Video Sync",
+      "description": "NVX receiver online but reports no video sync.",
+      "set": {"nvx_a_rx.online": true, "nvx_a_rx.video_sync": false}
+    },
+    {
+      "id": "room_a_muted",
+      "name": "Room A Muted",
+      "description": "Biamp/Shure style muted room state.",
+      "set": {"tesira_server.room_a_mute": true, "shure_mics.audio_mute": "ON"}
+    }
+  ]
+}
