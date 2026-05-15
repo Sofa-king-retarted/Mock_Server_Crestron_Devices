@@ -1,0 +1,2 @@
+# No third-party Python packages required for the base simulator.
+# Python 3.10+ recommended.
