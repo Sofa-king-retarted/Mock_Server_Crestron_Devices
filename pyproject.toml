@@ -1,0 +1,9 @@
+[project]
+name = "crestron-av-lab-simulator"
+version = "0.1.0"
+description = "Mock TCP, UDP, and HTTP device servers for Crestron AV lab testing."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
