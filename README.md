@@ -13,12 +13,37 @@ This is not a real hardware emulator for NVX, DM, HDMI, USB, AVB, HDCP, EDID, or
 - Command logging to `logs/commands.jsonl`
 - Device catalog for multiple lab templates
 - Lab profiles for different rooms or test benches
-- Mock endpoints for NVX, PJLink, Vaddio, VISCA-over-IP, Biamp Tesira, Shure, generic displays, scalers, and amplifiers
+- GUI lab builder for adding/removing devices from the catalog
+- Saveable lab profiles from the browser
+- Mock endpoints for NVX, PJLink, Vaddio, VISCA-over-IP, Biamp Tesira, Shure, generic displays, scalers, USB mocks, and amplifiers
 
-## Run on Windows
+## Put it on a Windows lab PC
+
+Open PowerShell and run:
 
 ```powershell
-py -3 -m crestron_av_sim --lab config/labs/default_lab.json
+Set-ExecutionPolicy -Scope Process Bypass -Force
+irm https://raw.githubusercontent.com/Sofa-king-retarted/Mock_Server_Crestron_Devices/main/scripts/setup_windows.ps1 -OutFile $env:TEMP\setup_crestron_lab.ps1
+powershell -ExecutionPolicy Bypass -File $env:TEMP\setup_crestron_lab.ps1
+```
+
+The setup script clones or updates the repo under:
+
+```text
+%USERPROFILE%\CrestronLabTools\Mock_Server_Crestron_Devices
+```
+
+It also creates two desktop launchers:
+
+```text
+Crestron AV Lab Simulator - Default.bat
+Crestron AV Lab Simulator - ABC Rooms.bat
+```
+
+## Run on Windows manually
+
+```powershell
+py -3 -m crestron_av_sim --lab config/labs/default_lab.json --open-browser
 ```
 
 Then open:
@@ -30,7 +55,7 @@ http://127.0.0.1:8080
 ## Run the A/B/C room lab
 
 ```powershell
-py -3 -m crestron_av_sim --lab config/labs/abc_rooms_lab.json
+py -3 -m crestron_av_sim --lab config/labs/abc_rooms_lab.json --open-browser
 ```
 
 ## Run with helper scripts
@@ -39,6 +64,18 @@ py -3 -m crestron_av_sim --lab config/labs/abc_rooms_lab.json
 .\scripts\run.ps1
 .\scripts\run.ps1 config/labs/abc_rooms_lab.json
 ```
+
+## GUI Lab Builder
+
+The dashboard has a Builder section where you can:
+
+- add a device from the catalog
+- set device ID, name, host, and port
+- start newly added fake devices
+- remove devices from the active profile
+- save the lab profile JSON
+
+If a device is removed after the server already bound its port, restart the app to free that old listener.
 
 ## Docker
 
