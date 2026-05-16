@@ -1,0 +1,25 @@
+{
+  "lab_id": "nvx_bench",
+  "name": "NVX Bench Lab",
+  "dashboard": {"host": "0.0.0.0", "port": 8080},
+  "defaults": {"host": "0.0.0.0", "online": true, "response_delay_ms": 0},
+  "devices": [
+    {"id": "nvx_360_1", "name": "DM-NVX-360 Bench 1", "model_key": "crestron_dm_nvx_360", "port": 8101, "state": {"stream_location": "239.8.10.1"}},
+    {"id": "nvx_350_1", "name": "DM-NVX-350 Bench 1", "model_key": "crestron_dm_nvx_350", "port": 8107, "state": {"stream_location": "239.8.10.7"}},
+    {"id": "nvx_351_1", "name": "DM-NVX-351 Bench 1", "model_key": "crestron_dm_nvx_351", "port": 8108, "state": {"stream_location": "239.8.10.8"}},
+    {"id": "nvx_352_1", "name": "DM-NVX-352 Bench 1", "model_key": "crestron_dm_nvx_352", "port": 8109, "state": {"stream_location": "239.8.10.9"}},
+    {"id": "nvx_363_1", "name": "DM-NVX-363 Bench 1", "model_key": "crestron_dm_nvx_363", "port": 8131, "state": {"stream_location": "239.8.13.1"}},
+    {"id": "nvx_e30_1", "name": "DM-NVX-E30 Encoder", "model_key": "crestron_dm_nvx_e30", "port": 8111, "state": {"stream_location": "239.8.11.1"}},
+    {"id": "nvx_d30_1", "name": "DM-NVX-D30 Decoder", "model_key": "crestron_dm_nvx_d30", "port": 8121, "state": {"stream_location": "239.8.11.1"}},
+    {"id": "nvx_e760_1", "name": "DM-NVX-E760 Encoder", "model_key": "crestron_dm_nvx_e760", "port": 8112, "state": {"stream_location": "239.8.11.2"}},
+    {"id": "nvx_d80_1", "name": "DM-NVX-D80 Decoder", "model_key": "crestron_dm_nvx_d80", "port": 8122, "state": {"stream_location": "239.8.11.2"}},
+    {"id": "nvx_d200_1", "name": "DM-NVX-D200 Decoder", "model_key": "crestron_dm_nvx_d200", "port": 8123, "state": {"stream_location": "239.8.11.3"}},
+    {"id": "nvx_351c_1", "name": "DM-NVX-351C Card", "model_key": "crestron_dm_nvx_351c", "port": 8141},
+    {"id": "nvx_352c_1", "name": "DM-NVX-352C Card", "model_key": "crestron_dm_nvx_352c", "port": 8142},
+    {"id": "usb_tx_1", "name": "USB Extender TX", "model_key": "crestron_usb_extender_tx", "port": 9301},
+    {"id": "usb_rx_1", "name": "USB Extender RX", "model_key": "crestron_usb_extender_rx", "port": 9302},
+    {"id": "dm_matrix_1", "name": "DM Matrix Mock", "model_key": "crestron_dm_md_matrix", "port": 9500},
+    {"id": "display_test", "name": "Test Display", "model_key": "generic_display_tcp", "port": 9100},
+    {"id": "projector_test", "name": "Test PJLink Projector", "model_key": "generic_pjlink_projector", "port": 4352}
+  ]
+}
