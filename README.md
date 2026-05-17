@@ -10,6 +10,8 @@ This is not a real hardware emulator for NVX, DM, HDMI, USB, AVB, HDCP, EDID, or
 - Per-device online/offline toggles
 - Editable state fields such as power, input, stream location, mute, video sync, and response delay
 - Scenario buttons for failure testing
+- Built-in mock self-test for the DOE lab TCP paths
+- CP4N traffic card showing whether `192.168.1.2` has reached each expected direct-control mock device
 - Command logging to `logs/commands.jsonl`
 - Device catalog for multiple lab templates
 - Lab profiles for different rooms or test benches
@@ -51,6 +53,57 @@ Then open:
 ```text
 http://127.0.0.1:8080
 ```
+
+## Run the built-in self-test
+
+On the dashboard, press **Run Self Test**. For the DOE multiroom lab this probes the local mock TCP paths for projectors, Sharp TVs, Tesira, Vaddio cameras, and NVX route commands. It does not prove the CP4N can reach the lab PC; use the CP4N Traffic card and command log for that.
+
+The same check is available as JSON:
+
+```text
+http://127.0.0.1:8080/api/self-test
+```
+
+## Check CP4N traffic
+
+The DOE dashboard Devices page marks each row as one of:
+
+- `CP4N seen`: the CP4N opened a socket and sent a command to that mock device.
+- `CP4N not hit`: this device is expected to receive a direct CP4N startup command, but none has been logged recently.
+- `Inventory only`: this device is part of the lab health/config inventory, but the startup check is not expected to directly command it.
+
+Rows marked `CP4N seen` also show the recent payload history from `192.168.1.2`, newest first, so you can verify the exact commands the processor sent to that device.
+
+The dashboard includes an optional `Live Refresh` card. Leave it off while scrolling logs, or turn it on when watching the CP4N send fresh traffic; live mode reloads every 5 seconds and shows the last-seen age on the CP4N Traffic card.
+
+For the DOE multiroom lab, a healthy CP4N startup currently reports:
+
+```text
+16/16 expected direct-control devices
+```
+
+The same check is available as JSON:
+
+```text
+http://127.0.0.1:8080/api/cp4n-activity
+```
+
+The `Audit` section checks the CP4N payload text against expected DOE startup commands. This catches content problems, such as an NVX route using a source ID with the wrong multicast stream. The same audit is available as JSON:
+
+```text
+http://127.0.0.1:8080/api/cp4n-audit
+```
+
+The DOE lab scenarios include quick fault drills:
+
+- `DOE All Online`
+- `DOE Room A Projector Offline`
+- `DOE Tesira Slow Replies`
+- `DOE Tesira Offline`
+- `DOE Room B Rear Camera Offline`
+- `DOE Room A TV NVX No Video`
+
+Use these from the `Scenarios` section, then run/reload the CP4N backend and watch `CP4N Traffic`, `Audit`, and the touchpanel health page.
 
 ## Run the A/B/C room lab
 
