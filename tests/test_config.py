@@ -71,6 +71,68 @@ def test_doe_multiroom_fault_scenario_changes_expected_device_state():
     assert all(device['state']['online'] is True for device in devices.values())
 
 
+def test_doe_multiroom_room_path_scenarios_match_install_day_failures():
+    app = LabApp(
+        'config/labs/doe_multiroom_lab.json',
+        load_json('config/labs/doe_multiroom_lab.json'),
+        load_json('catalog/device_catalog.json'),
+        load_json('config/scenarios.json'),
+    )
+
+    app.apply_scenario('doe_room_b_projector_path_degraded')
+    devices = {device['id']: device for device in app.snapshot()['devices']}
+
+    assert devices['projector_b']['state']['online'] is False
+    assert devices['DM-NVX-D30C-506-AVBridge']['state']['online'] is False
+    assert devices['projector_a']['state']['online'] is True
+
+    app.apply_scenario('doe_all_online')
+    app.apply_scenario('doe_room_c_control_network_down')
+    devices = {device['id']: device for device in app.snapshot()['devices']}
+
+    assert devices['projector_c']['state']['online'] is False
+    assert devices['sharp_tv_c']['state']['online'] is False
+    assert devices['VADDIO-C-FRONT']['state']['online'] is False
+    assert devices['VADDIO-C-REAR']['state']['online'] is False
+    assert devices['DM-NVX-D30-C-TV']['state']['online'] is False
+    assert devices['DM-NVX-D30C-507-AVBridge']['state']['online'] is False
+    assert devices['projector_a']['state']['online'] is True
+
+
+def test_doe_multiroom_group_scenarios_cover_video_and_camera_failures():
+    app = LabApp(
+        'config/labs/doe_multiroom_lab.json',
+        load_json('config/labs/doe_multiroom_lab.json'),
+        load_json('catalog/device_catalog.json'),
+        load_json('config/scenarios.json'),
+    )
+
+    app.apply_scenario('doe_all_tv_decoders_no_video')
+    devices = {device['id']: device for device in app.snapshot()['devices']}
+
+    assert devices['DM-NVX-D30-A-TV']['state']['online'] is True
+    assert devices['DM-NVX-D30-B-TV']['state']['online'] is True
+    assert devices['DM-NVX-D30-C-TV']['state']['online'] is True
+    assert devices['DM-NVX-D30-A-TV']['state']['video_sync'] is False
+    assert devices['DM-NVX-D30-B-TV']['state']['video_sync'] is False
+    assert devices['DM-NVX-D30-C-TV']['state']['video_sync'] is False
+
+    app.apply_scenario('doe_all_online')
+    app.apply_scenario('doe_all_cameras_offline')
+    devices = {device['id']: device for device in app.snapshot()['devices']}
+
+    camera_ids = {
+        'VADDIO-A-FRONT',
+        'VADDIO-A-REAR',
+        'VADDIO-B-FRONT',
+        'VADDIO-B-REAR',
+        'VADDIO-C-FRONT',
+        'VADDIO-C-REAR',
+    }
+    assert all(devices[device_id]['state']['online'] is False for device_id in camera_ids)
+    assert devices['BIAMP-TESIRA']['state']['online'] is True
+
+
 def test_doe_multiroom_lab_matches_backend_mock_ports():
     lab = json.loads(Path('config/labs/doe_multiroom_lab.json').read_text(encoding='utf-8'))
     devices = {d['id']: d for d in lab['devices']}

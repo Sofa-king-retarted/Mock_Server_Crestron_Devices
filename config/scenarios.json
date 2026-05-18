@@ -110,6 +110,58 @@
       "description": "Room A TV decoder stays online but reports no video sync.",
       "labs": ["doe_multiroom"],
       "set": {"DM-NVX-D30-A-TV.online": true, "DM-NVX-D30-A-TV.video_sync": false}
+    },
+    {
+      "id": "doe_room_b_projector_path_degraded",
+      "name": "DOE Room B Projector Path Degraded",
+      "description": "Room B projector and projector AVBridge decoder are both unavailable to test projector-path fault isolation.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "projector_b.online": false,
+        "DM-NVX-D30C-506-AVBridge.online": false
+      }
+    },
+    {
+      "id": "doe_room_c_control_network_down",
+      "name": "DOE Room C Control Network Down",
+      "description": "Room C controlled devices refuse connections while the rest of the system remains online.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "projector_c.online": false,
+        "sharp_tv_c.online": false,
+        "VADDIO-C-FRONT.online": false,
+        "VADDIO-C-REAR.online": false,
+        "DM-NVX-D30-C-TV.online": false,
+        "DM-NVX-D30C-507-AVBridge.online": false
+      }
+    },
+    {
+      "id": "doe_all_tv_decoders_no_video",
+      "name": "DOE All TV NVX Decoders No Video",
+      "description": "All TV decoders stay online but report no video sync.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "DM-NVX-D30-A-TV.online": true,
+        "DM-NVX-D30-B-TV.online": true,
+        "DM-NVX-D30-C-TV.online": true,
+        "DM-NVX-D30-A-TV.video_sync": false,
+        "DM-NVX-D30-B-TV.video_sync": false,
+        "DM-NVX-D30-C-TV.video_sync": false
+      }
+    },
+    {
+      "id": "doe_all_cameras_offline",
+      "name": "DOE All Vaddio Cameras Offline",
+      "description": "Every Vaddio PTZ camera refuses TCP connections while other devices stay online.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "VADDIO-A-FRONT.online": false,
+        "VADDIO-A-REAR.online": false,
+        "VADDIO-B-FRONT.online": false,
+        "VADDIO-B-REAR.online": false,
+        "VADDIO-C-FRONT.online": false,
+        "VADDIO-C-REAR.online": false
+      }
     }
   ]
 }

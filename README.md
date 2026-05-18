@@ -102,6 +102,10 @@ The DOE lab scenarios include quick fault drills:
 - `DOE Tesira Offline`
 - `DOE Room B Rear Camera Offline`
 - `DOE Room A TV NVX No Video`
+- `DOE Room B Projector Path Degraded`
+- `DOE Room C Control Network Down`
+- `DOE All TV NVX Decoders No Video`
+- `DOE All Vaddio Cameras Offline`
 
 Use these from the `Scenarios` section, then run/reload the CP4N backend and watch `CP4N Traffic`, `Audit`, and the touchpanel health page.
 
