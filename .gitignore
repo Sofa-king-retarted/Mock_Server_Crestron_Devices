@@ -3,6 +3,7 @@ __pycache__/
 .env
 .venv/
 logs/*.jsonl
+logs/*.log
 build/
 dist/
 *.spec

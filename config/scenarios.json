@@ -4,6 +4,7 @@
       "id": "normal_startup",
       "name": "Normal Startup",
       "description": "Everything online with normal feedback.",
+      "labs": ["legacy", "default_single_room", "abc_rooms"],
       "set": {
         "projector_a.online": true,
         "camera_a.online": true,
@@ -19,25 +20,148 @@
       "id": "projector_offline",
       "name": "Projector Offline",
       "description": "Projector does not accept TCP connections.",
+      "labs": ["legacy", "default_single_room", "abc_rooms"],
       "set": {"projector_a.online": false}
     },
     {
       "id": "slow_tesira",
       "name": "Slow Tesira Replies",
       "description": "Tesira responds slowly to test timeout and retry logic.",
+      "labs": ["legacy", "default_single_room", "abc_rooms"],
       "set": {"tesira_server.online": true, "tesira_server.response_delay_ms": 2500}
     },
     {
       "id": "nvx_no_video_sync",
       "name": "NVX No Video Sync",
       "description": "NVX receiver online but reports no video sync.",
+      "labs": ["legacy", "default_single_room", "abc_rooms"],
       "set": {"nvx_a_rx.online": true, "nvx_a_rx.video_sync": false}
     },
     {
       "id": "room_a_muted",
       "name": "Room A Muted",
       "description": "Biamp/Shure style muted room state.",
+      "labs": ["legacy", "default_single_room", "abc_rooms"],
       "set": {"tesira_server.room_a_mute": true, "shure_mics.audio_mute": "ON"}
+    },
+    {
+      "id": "doe_all_online",
+      "name": "DOE All Online",
+      "description": "Reset the DOE lab direct-control devices to online with normal response timing.",
+      "labs": ["doe_multiroom"],
+      "set_all": {
+        "online": true,
+        "response_delay_ms": 0
+      },
+      "set": {
+        "projector_a.online": true,
+        "projector_b.online": true,
+        "projector_c.online": true,
+        "sharp_tv_a.online": true,
+        "sharp_tv_b.online": true,
+        "sharp_tv_c.online": true,
+        "BIAMP-TESIRA.online": true,
+        "BIAMP-TESIRA.response_delay_ms": 0,
+        "VADDIO-A-FRONT.online": true,
+        "VADDIO-A-REAR.online": true,
+        "VADDIO-B-FRONT.online": true,
+        "VADDIO-B-REAR.online": true,
+        "VADDIO-C-FRONT.online": true,
+        "VADDIO-C-REAR.online": true,
+        "DM-NVX-D30-A-TV.online": true,
+        "DM-NVX-D30-B-TV.online": true,
+        "DM-NVX-D30-C-TV.online": true,
+        "DM-NVX-D30-A-TV.video_sync": true,
+        "DM-NVX-D30-B-TV.video_sync": true,
+        "DM-NVX-D30-C-TV.video_sync": true
+      }
+    },
+    {
+      "id": "doe_projector_a_offline",
+      "name": "DOE Room A Projector Offline",
+      "description": "Room A projector refuses TCP connections while other devices stay online.",
+      "labs": ["doe_multiroom"],
+      "set": {"projector_a.online": false}
+    },
+    {
+      "id": "doe_tesira_slow",
+      "name": "DOE Tesira Slow Replies",
+      "description": "Tesira stays online but delays replies to exercise timeout and retry behavior.",
+      "labs": ["doe_multiroom"],
+      "set": {"BIAMP-TESIRA.online": true, "BIAMP-TESIRA.response_delay_ms": 2500}
+    },
+    {
+      "id": "doe_tesira_offline",
+      "name": "DOE Tesira Offline",
+      "description": "Tesira refuses TCP connections.",
+      "labs": ["doe_multiroom"],
+      "set": {"BIAMP-TESIRA.online": false}
+    },
+    {
+      "id": "doe_camera_b_rear_offline",
+      "name": "DOE Room B Rear Camera Offline",
+      "description": "Room B rear Vaddio camera refuses TCP connections.",
+      "labs": ["doe_multiroom"],
+      "set": {"VADDIO-B-REAR.online": false}
+    },
+    {
+      "id": "doe_nvx_a_tv_no_video",
+      "name": "DOE Room A TV NVX No Video",
+      "description": "Room A TV decoder stays online but reports no video sync.",
+      "labs": ["doe_multiroom"],
+      "set": {"DM-NVX-D30-A-TV.online": true, "DM-NVX-D30-A-TV.video_sync": false}
+    },
+    {
+      "id": "doe_room_b_projector_path_degraded",
+      "name": "DOE Room B Projector Path Degraded",
+      "description": "Room B projector and projector AVBridge decoder are both unavailable to test projector-path fault isolation.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "projector_b.online": false,
+        "DM-NVX-D30C-506-AVBridge.online": false
+      }
+    },
+    {
+      "id": "doe_room_c_control_network_down",
+      "name": "DOE Room C Control Network Down",
+      "description": "Room C controlled devices refuse connections while the rest of the system remains online.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "projector_c.online": false,
+        "sharp_tv_c.online": false,
+        "VADDIO-C-FRONT.online": false,
+        "VADDIO-C-REAR.online": false,
+        "DM-NVX-D30-C-TV.online": false,
+        "DM-NVX-D30C-507-AVBridge.online": false
+      }
+    },
+    {
+      "id": "doe_all_tv_decoders_no_video",
+      "name": "DOE All TV NVX Decoders No Video",
+      "description": "All TV decoders stay online but report no video sync.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "DM-NVX-D30-A-TV.online": true,
+        "DM-NVX-D30-B-TV.online": true,
+        "DM-NVX-D30-C-TV.online": true,
+        "DM-NVX-D30-A-TV.video_sync": false,
+        "DM-NVX-D30-B-TV.video_sync": false,
+        "DM-NVX-D30-C-TV.video_sync": false
+      }
+    },
+    {
+      "id": "doe_all_cameras_offline",
+      "name": "DOE All Vaddio Cameras Offline",
+      "description": "Every Vaddio PTZ camera refuses TCP connections while other devices stay online.",
+      "labs": ["doe_multiroom"],
+      "set": {
+        "VADDIO-A-FRONT.online": false,
+        "VADDIO-A-REAR.online": false,
+        "VADDIO-B-FRONT.online": false,
+        "VADDIO-B-REAR.online": false,
+        "VADDIO-C-FRONT.online": false,
+        "VADDIO-C-REAR.online": false
+      }
     }
   ]
 }
